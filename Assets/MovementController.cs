@@ -21,25 +21,25 @@ public class MovementController : MonoBehaviour
         if (Input.GetButton("forward"))
         {
             Vector3 pos = transform.position;
-            pos.z += walkSpeed;
+            pos.z += walkSpeed / 100;
             transform.position = pos;
         }
         if (Input.GetButton("back"))
         {
             Vector3 pos = transform.position;
-            pos.z -= walkSpeed;
+            pos.z -= walkSpeed / 100;
             transform.position = pos;
         }
         if (Input.GetButton("right"))
         {
             Vector3 pos = transform.position;
-            pos.x += turnSpeed;
+            pos.x += turnSpeed / 100;
             transform.position = pos;
         }
         if (Input.GetButton("left"))
         {
             Vector3 pos = transform.position;
-            pos.x -= turnSpeed;
+            pos.x -= turnSpeed / 100;
             transform.position = pos;
         }
     }

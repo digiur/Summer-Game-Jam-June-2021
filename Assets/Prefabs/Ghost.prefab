@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1332641627562436251}
-  - component: {fileID: 7657486471680268024}
+  - component: {fileID: 2156817237890386447}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Grounded
@@ -32,19 +32,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &7657486471680268024
-SphereCollider:
+--- !u!114 &2156817237890386447
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648660275299312293}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94de32f2e6c7f04cb2982bd71aa1962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perception: 10
+  maxSpeed: 0.05
+  distPow: 1
+  horizontalClamp: 3
 --- !u!1 &1851122499084700297
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,6 +58,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4431517571900556225}
   - component: {fileID: 4338415222333626789}
+  - component: {fileID: 2131158315}
   m_Layer: 0
   m_Name: Ghost Sprite
   m_TagString: Untagged
@@ -127,3 +131,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!135 &2131158315
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851122499084700297}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 9.74
+  m_Center: {x: 0, y: 0, z: 0}
