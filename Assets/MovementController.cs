@@ -6,7 +6,8 @@ public class MovementController : MonoBehaviour
 {
     [SerializeField]
     private float walkSpeed;
-
+    [SerializeField]
+    private float backSpeed;
     [SerializeField]
     private float turnSpeed;
 
@@ -27,7 +28,7 @@ public class MovementController : MonoBehaviour
         if (Input.GetButton("back"))
         {
             Vector3 pos = transform.position;
-            pos.z -= walkSpeed / 100;
+            pos.z -= backSpeed / 100;
             transform.position = pos;
         }
         if (Input.GetButton("right"))

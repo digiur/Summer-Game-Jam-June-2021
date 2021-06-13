@@ -357,6 +357,10 @@ PrefabInstance:
       propertyPath: maxSpeed
       value: 0.025
       objectReference: {fileID: 0}
+    - target: {fileID: 2156817237890386447, guid: 549a1509c16c5b84baf94bcbe345e589, type: 3}
+      propertyPath: minSpeed
+      value: 0.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 549a1509c16c5b84baf94bcbe345e589, type: 3}
 --- !u!1001 &1138583065
@@ -696,12 +700,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9154343886141909814, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
+      propertyPath: backSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9154343886141909814, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
       propertyPath: turnSpeed
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 9154343886141909814, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
       propertyPath: walkSpeed
-      value: 0.8
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 9154343886141909815, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
       propertyPath: m_Name

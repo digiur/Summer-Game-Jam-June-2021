@@ -7,9 +7,7 @@ public class Ghost : MonoBehaviour
     [SerializeField]
     private float perception;
     [SerializeField]
-    private float maxSpeed;
-    [SerializeField]
-    private float distPow;
+    private float speed;
     [SerializeField]
     private float horizontalClamp;
     private GameObject target;
@@ -32,11 +30,8 @@ public class Ghost : MonoBehaviour
 
         if (dist > perception) return;
 
-        // float t = Mathf.InverseLerp(perception, 0, dist);
-        // float speed = Mathf.SmoothStep(0, maxSpeed, t);
-        myV += delta.normalized * (maxSpeed / (dist + 0.05f));
-
-        //myV.x = Mathf.Clamp(myV.x, targetV.x - horizontalClamp, targetV.x + horizontalClamp);
+        myV += delta.normalized * Mathf.Max(speed, (speed / (dist + 0.01f)));
+        myV.x = Mathf.Clamp(myV.x, targetV.x - horizontalClamp, targetV.x + horizontalClamp);
 
         transform.position = new Vector3(myV.x, transform.position.y, myV.y);
     }
