@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   perception: 10
-  maxSpeed: 0.05
-  distPow: 1
+  speed: 0.01
+  distPow: 1.5
   horizontalClamp: 3
 --- !u!1 &1851122499084700297
 GameObject:
