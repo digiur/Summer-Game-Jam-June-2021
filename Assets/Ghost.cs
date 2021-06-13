@@ -13,13 +13,11 @@ public class Ghost : MonoBehaviour
     [SerializeField]
     private float horizontalClamp;
     private GameObject target;
-    private static List<GameObject> ghosts = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
-        ghosts.Add(gameObject);
     }
 
     // Update is called once per frame

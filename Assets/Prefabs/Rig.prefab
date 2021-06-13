@@ -550,8 +550,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d60b5d31ffe467446839e15e9f222897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minScale: 0.5
-  maxScale: 1.5
+  minScale: 1
+  maxScale: 2.5
   farDistance: 20
   nearDistance: 10
   epsilon: 0.1
