@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+        int windEventProbability = 100;
+        int ghostEventProbability = 100;
+        int iceEventProbability = 100;
 
     public static GameManager instance;
     public GameState state;
@@ -13,16 +16,13 @@ public class GameManager : MonoBehaviour
     }
 
     void Start(){
-        UpdateGameState(GameState.MainMenu);
+        UpdateGameState(GameState.Phase1);
     }
 
     public void UpdateGameState(GameState newState){
         state = newState;
 
         switch (newState){
-            case GameState.MainMenu:
-                HandleMainMenu();
-                break;
             case GameState.Phase1:
                 HandlePhase1();
                 break;
@@ -37,18 +37,63 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void HandleMainMenu(){
-        SceneManager.LoadScene(0);
-    }
+//Stage Handlers
     public void HandlePhase1(){
-        SceneManager.LoadScene(1);
+
+
+
+
+
     }
     public enum GameState {
-        MainMenu,
         Phase1,
         Phase2,
         Phase3,
         Victory,
         GameOver
+    }
+
+//Probability Method
+    private void EventProbabilityCounter(float multiplier){
+        int numToCheck = 0;
+
+        int windNumber = Random.Range(0 , windEventProbability);
+        int ghostNumber = Random.Range(0, ghostEventProbability);
+        int iceNumber = Random.Range(0, iceEventProbability);
+
+        if(numToCheck == windNumber){
+            //run wind event
+
+        } else if(numToCheck == ghostNumber){
+            //run ghost event
+
+        } else if(numToCheck == iceNumber){
+            //run ice event
+
+        } else {
+            //do nothing
+        }
+
+    }
+
+    //EventMethods
+    private void StartWindEvent(){
+        Debug.Log("STARTED WIND");
+        windEventProbability = 100;
+    }
+    private void StartGhostEvent(){
+        Debug.Log("STARTED GHOST");
+        ghostEventProbability = 100;
+    }
+    private void StartIceEvent(){
+        Debug.Log("STARTED ICE");
+        iceEventProbability = 100;
+    }
+
+
+//Coroutines 
+    private IEnumerator IncreaseProbability(int eventProb){
+        yield return new WaitForSeconds(1);
+        eventProb--;
     }
 }
