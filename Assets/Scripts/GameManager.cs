@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -37,10 +38,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void HandleMainMenu(){
-
+        SceneManager.LoadScene(0);
     }
     public void HandlePhase1(){
-        
+        SceneManager.LoadScene(1);
     }
     public enum GameState {
         MainMenu,
