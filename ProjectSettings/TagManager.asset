@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Has Perspective
-  - Grounded
+  - Decal
+  - Sprite
   layers:
   - Default
   - TransparentFX
@@ -40,6 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 49281649
+    locked: 0
+  - name: Footsteps
+    uniqueID: 3383605631
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

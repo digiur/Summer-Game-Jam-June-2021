@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4641867560543038311}
   m_Layer: 0
   m_Name: Tall Ghost
-  m_TagString: Grounded
+  m_TagString: Sprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f94de32f2e6c7f04cb2982bd71aa1962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perception: 10
+  perception: 6
   speed: 1.2
   epsilon: 0.006
   horizontalClamp: 3
