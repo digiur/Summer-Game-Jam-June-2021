@@ -44,7 +44,7 @@ public class PlayerManager : MonoBehaviour
        // Debug.Log("SPAWNED GHOST");
         Instantiate(ghost, new Vector3((player.transform.position.x + Random.Range(-7, 7)),
                                                 (player.transform.position.y), 
-                                                (player.transform.position.z + 10)), Quaternion.identity);
+                                                (player.transform.position.z + 15)), Quaternion.identity);
     }
 
     private void SpawnIce(){
@@ -54,7 +54,7 @@ public class PlayerManager : MonoBehaviour
     //COLLISION
     void OnTriggerEnter(Collider collision){
         Debug.Log("COLLIDED");
-        if(collision.gameObject.tag == "Grounded"){
+        if(collision.gameObject.tag == "Sprite"){
             ghostList.Add(collision.gameObject);
         }
     }
