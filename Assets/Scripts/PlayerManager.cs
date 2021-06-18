@@ -8,6 +8,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public GameObject wind;
     [SerializeField] public GameObject crack;
 
+    private List<GameObject> ghostList = new List<GameObject>();
+
     private GameObject player;
     bool checkingProb = false;
     int result = -1;
@@ -23,9 +25,14 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
+        //Start Spawning Events
          if(!checkingProb){
              StartCoroutine(checkProbability());
         }
+
+        //Raise Lamp
+        raiseLamp();
+
     }
 
     //SPAWNING METHODS
@@ -34,7 +41,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     private void SpawnGhost(){
-        Debug.Log("SPAWNED GHOST");
+       // Debug.Log("SPAWNED GHOST");
         Instantiate(ghost, new Vector3((player.transform.position.x + Random.Range(-7, 7)),
                                                 (player.transform.position.y), 
                                                 (player.transform.position.z + 10)), Quaternion.identity);
@@ -42,6 +49,24 @@ public class PlayerManager : MonoBehaviour
 
     private void SpawnIce(){
 
+    }
+
+    //COLLISION
+    void OnTriggerEnter(Collider collision){
+        Debug.Log("COLLIDED");
+        if(collision.gameObject.tag == "Grounded"){
+            ghostList.Add(collision.gameObject);
+        }
+    }
+
+    //REACTION METHODS
+    private void raiseLamp(){
+        if(Input.GetKey(KeyCode.E)){
+            foreach(GameObject obj in ghostList){
+                ghostList.Remove(obj);
+                Destroy(obj);
+            }
+        }
     }
 
     //IEnumerators
@@ -52,7 +77,7 @@ public class PlayerManager : MonoBehaviour
 
             while(runLoop){
                 result = GameManager.EventProbabilityCounter(windProb, ghostProb, iceProb);
-                Debug.Log(result);
+                //Debug.Log(result);
                 if(result != -1){
                     if(result == 0){
                         //spawn wind
@@ -77,5 +102,7 @@ public class PlayerManager : MonoBehaviour
                 }
             }
         }
+
+
 
 }

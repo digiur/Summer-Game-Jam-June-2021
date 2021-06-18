@@ -92,6 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3218749007080074030}
   - component: {fileID: 4641867560543038311}
+  - component: {fileID: 8861519277466179323}
   m_Layer: 0
   m_Name: Tall Ghost
   m_TagString: Sprite
@@ -130,3 +131,16 @@ MonoBehaviour:
   speed: 1.2
   epsilon: 0.006
   horizontalClamp: 3
+--- !u!65 &8861519277466179323
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5211660174523767387}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.44426703, y: 0.8742172, z: 0.07310152}
+  m_Center: {x: 0.017438777, y: 0.4277186, z: 0.007910408}

@@ -86,9 +86,9 @@ public static class GameManager
         //Debug.Log("GHOST NUMBER: " + ghostNumber);
         // Debug.Log("ICE NUMBER: " + iceNumber);
 
-        Debug.Log(windEventProbability);
-        Debug.Log(ghostEventProbability);
-        Debug.Log(iceEventProbability);
+        // Debug.Log(windEventProbability);
+        // Debug.Log(ghostEventProbability);
+        // Debug.Log(iceEventProbability);
         if(numToCheck == windNumber){
             //run wind event
             //Debug.Log("EVENT: WIND");
@@ -100,7 +100,7 @@ public static class GameManager
             return 1;
 
         } else if(numToCheck == iceNumber){
-            Debug.Log("EVENT: ICE");
+            //Debug.Log("EVENT: ICE");
             //run ice event
             return 2;
 
