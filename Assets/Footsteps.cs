@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Footsteps : MonoBehaviour
 {
+
     [SerializeField]
     private float timeBetweenSteps;
     [SerializeField]
