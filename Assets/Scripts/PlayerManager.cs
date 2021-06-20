@@ -10,17 +10,29 @@ public class PlayerManager : MonoBehaviour
 
     private List<GameObject> ghostList = new List<GameObject>();
 
-    private GameObject player;
+    bool walking = false;
     bool checkingProb = false;
+    bool creatingFootsteps = false;
+    bool windActive = false;
+
+    private GameObject player;
+    private Footsteps FootstepsScript;
+    private GameObject rig;
+    private MovementController mc;
+
     int result = -1;
 
-        int windProb = 10;
-        int ghostProb = 10;
-        int iceProb = 10;
+    int windProb = 10;
+    int ghostProb = 10;
+    int iceProb = 10;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        FootstepsScript = player.GetComponent<Footsteps>();
+        rig = GameObject.FindGameObjectWithTag("Rig");
+        mc = rig.GetComponent<MovementController>();
+
     }
 
     void Update()
@@ -30,6 +42,8 @@ public class PlayerManager : MonoBehaviour
              StartCoroutine(checkProbability());
         }
 
+        Walking();
+
         //Raise Lamp
         raiseLamp();
 
@@ -37,7 +51,7 @@ public class PlayerManager : MonoBehaviour
 
     //SPAWNING METHODS
     private void SpawnWind(){
-
+        StartCoroutine(windHowling(5));
     }
 
     private void SpawnGhost(){
@@ -69,6 +83,17 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    //MOVEMENT
+    void Walking(){
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)){
+            walking = true;
+            if(!creatingFootsteps){
+                StartCoroutine(createFootsteps());
+            }
+        }
+        walking = false;
+    }
+
     //IEnumerators
 
         public IEnumerator checkProbability(){
@@ -79,16 +104,17 @@ public class PlayerManager : MonoBehaviour
                 result = GameManager.EventProbabilityCounter(windProb, ghostProb, iceProb);
                 //Debug.Log(result);
                 if(result != -1){
-                    if(result == 0){
+                    if(result == 0 && !windActive){
                         //spawn wind
-                        windProb = 10;
+                        windProb = 20;
+                        SpawnWind();
                         //Debug.Log("SPAWNED WIND");
                     } else if(result == 1){
                         //spawn ghost
-                        ghostProb = 10;
+                        ghostProb = 20;
                         SpawnGhost();
                     } else if(result == 2){
-                        iceProb =10;
+                        iceProb =20;
                         //Debug.Log("SPAWNED ICE");
                     }
                     checkingProb = false;
@@ -103,6 +129,35 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
+        public IEnumerator createFootsteps(){
+            while(walking){
+                creatingFootsteps = true;
+                FootstepsScript.makeFootstep();
+                yield return new WaitForSeconds(1);
+            }
+            creatingFootsteps = false;
+        }
 
+        public IEnumerator windHowling(int duration){
+            windActive = true;
+            int direction = Random.Range(0,1);
+            GameObject windOBJ = Instantiate(wind, new Vector3(0,0,0), Quaternion.identity);
+            if(direction == 0){
+                mc.windLeft = true;
+            } else {
+                mc.windRight = true;
+            }
+            yield return new WaitForSeconds(duration);
+            mc.windLeft = false;
+            mc.windRight = false;
+            Destroy(windOBJ);
+            windActive = false;
+
+        }
+
+    //External use methods
+    public void takeDamage(){
+        Debug.Log("Take Damage");
+    }
 
 }
