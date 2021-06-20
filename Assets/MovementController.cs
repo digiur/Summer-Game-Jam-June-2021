@@ -11,6 +11,9 @@ public class MovementController : MonoBehaviour
     [SerializeField]
     private float turnSpeed;
 
+    public bool windLeft = false;
+    public bool windRight = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,5 +46,24 @@ public class MovementController : MonoBehaviour
             pos.x -= turnSpeed * Time.deltaTime;
             transform.position = pos;
         }
+
+        if(windLeft){
+            Vector3 pos = transform.position;
+            pos.x -= turnSpeed/2 * Time.deltaTime;
+            transform.position = pos;
+            if(pos.x >= 5 || pos.x <= -5){
+                Debug.Log("YOU ARE LOST");
+            }
+        }
+        if(windRight){
+            Vector3 pos = transform.position;
+            pos.x += turnSpeed/2 * Time.deltaTime;
+            transform.position = pos;
+            if(pos.x >= 5 || pos.x <= -5){
+                Debug.Log("YOU ARE LOST");
+            }
+        }
+
+
     }
 }

@@ -54,8 +54,8 @@ public class PerspectiveController : MonoBehaviour
             {
                 //near y
                 Vector3 newPosition = spritePos;
-                t = Mathf.InverseLerp(worldNear, myPos.z - epsilon, newPosition.z);
-                newPosition.y = t * myPos.y;
+                t = Mathf.InverseLerp(myPos.z - epsilon, worldNear, newPosition.z);
+                newPosition.y = myPos.y - (4 * t * t * myPos.y);
                 sprite.transform.position = newPosition;
             }
         }
@@ -75,16 +75,15 @@ public class PerspectiveController : MonoBehaviour
                 //far y
                 Vector3 newPosition = decalPos;
                 t = Mathf.InverseLerp(worldFar, myPos.z + epsilon, newPosition.z);
-                newPosition.y = t * myPos.y;
+                newPosition.y = t * myPos.y - epsilon;
                 decal.transform.position = newPosition;
             }
             if (decalPos.z < myPos.z - epsilon && decalPos.z > worldNear)
             {
                 //near y
                 Vector3 newPosition = decalPos;
-                t = Mathf.InverseLerp(worldNear, myPos.z - epsilon, newPosition.z);
-                float i = Mathf.Lerp(1, 0, t);
-                newPosition.y = t * myPos.y - i;
+                t = Mathf.InverseLerp(myPos.z - epsilon, worldNear, newPosition.z);
+                newPosition.y = myPos.y - (4 * t * t * myPos.y) - epsilon;
                 decal.transform.position = newPosition;
             }
         }

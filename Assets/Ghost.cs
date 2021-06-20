@@ -13,11 +13,16 @@ public class Ghost : MonoBehaviour
     [SerializeField]
     private float horizontalClamp;
     private GameObject target;
+    private PlayerManager pm;
+    private AudioSource _as;
+    [SerializeField] public AudioClip screech;
 
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
+        pm = target.GetComponent<PlayerManager>();
+        _as = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -34,5 +39,27 @@ public class Ghost : MonoBehaviour
         myV.x = Mathf.Clamp(myV.x, targetV.x - horizontalClamp, targetV.x + horizontalClamp);
 
         transform.position = new Vector3(myV.x, transform.position.y, myV.y);
+
+        if((transform.position.x - target.transform.position.x) < .5 &&
+            (transform.position.y - target.transform.position.y) < .5 &&
+            (transform.position.z - target.transform.position.z) < .5){
+            StartCoroutine(DestroyScreech());
+            pm.takeDamage();
+        }
     }
+
+    void OnDestroy(){
+
+    }
+
+    public IEnumerator DestroyScreech(){
+        _as.clip = screech;
+        _as.PlayOneShot(_as.clip);
+
+        yield return new WaitForSeconds(0.5f);
+
+        Destroy(this.gameObject);
+        
+    }
+
 }
