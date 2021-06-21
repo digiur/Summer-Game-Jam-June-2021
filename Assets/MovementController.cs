@@ -13,6 +13,7 @@ public class MovementController : MonoBehaviour
 
     public bool windLeft = false;
     public bool windRight = false;
+    public bool iceCracked = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("forward"))
+        if (Input.GetButton("forward") && !iceCracked)
         {
             Vector3 pos = transform.position;
             pos.z += walkSpeed * Time.deltaTime;

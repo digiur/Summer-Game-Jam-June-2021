@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour
     bool checkingProb = false;
     bool creatingFootsteps = false;
     bool windActive = false;
+    bool win = false;
 
     private GameObject player;
     private Footsteps FootstepsScript;
@@ -28,9 +29,9 @@ public class PlayerManager : MonoBehaviour
 
     int result = -1;
 
-    int windProb = 10;
+    int windProb = 50;
     int ghostProb = 10;
-    int iceProb = 10;
+    int iceProb = 50;
 
     void Start()
     {
@@ -43,6 +44,7 @@ public class PlayerManager : MonoBehaviour
 
 
         pc.blowTopDown();
+        StartCoroutine(startWinCounter(12));
     }
 
     void Update()
@@ -56,6 +58,10 @@ public class PlayerManager : MonoBehaviour
 
         //Raise Lamp
         raiseLamp();
+
+        if(win){
+            Debug.Log("YOU WON");
+        }
 
     }
 
@@ -73,6 +79,7 @@ public class PlayerManager : MonoBehaviour
 
     private void SpawnIce(){
         int rightOrLeft = Random.Range(0,100);
+        mc.iceCracked = true;
         if(rightOrLeft <= 50){
                 Vector3 pos = rightTransform.position;
                 pos.z += 1;
@@ -129,15 +136,15 @@ public class PlayerManager : MonoBehaviour
                 if(result != -1){
                     if(result == 0 && !windActive){
                         //spawn wind
-                        windProb = 20;
+                        windProb = 50;
                         SpawnWind();
                         //Debug.Log("SPAWNED WIND");
                     } else if(result == 1){
                         //spawn ghost
-                        ghostProb = 20;
+                        ghostProb = 10;
                         SpawnGhost();
                     } else if(result == 2){
-                        iceProb = 20;
+                        iceProb = 50;
                         SpawnIce();
                         //Debug.Log("SPAWNED ICE");
                     }
@@ -187,12 +194,18 @@ public class PlayerManager : MonoBehaviour
             if(((player.transform.position.x - iceCrack.transform.position.x) <= 0.7f) &&
                 ((player.transform.position.x - iceCrack.transform.position.x) >= -0.7f)){
 
-                Debug.Log("INSIDE " + (player.transform.position.x - iceCrack.transform.position.x));
+                Debug.Log("You Have fallen in the ice crack");
             }
             else{
-                Debug.Log("OUTSIDE " + (player.transform.position.x - iceCrack.transform.position.x));
+                Debug.Log("You have bypassed the ice crack");
             }
+            mc.iceCracked = false;
             yield return null;
+        }
+
+        public IEnumerator startWinCounter(int durationToWin){
+            yield return new WaitForSeconds(durationToWin);
+            win = true;
         }
 
     //External use methods

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5510945996797981070}
   m_Layer: 0
   m_Name: ICECRACK
-  m_TagString: crack
+  m_TagString: Decal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
