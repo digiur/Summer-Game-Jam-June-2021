@@ -10,6 +10,7 @@ TagManager:
   - Decal
   - Rig
   - crack
+  - Ghost
   layers:
   - Default
   - TransparentFX
