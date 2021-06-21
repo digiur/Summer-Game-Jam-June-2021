@@ -19,6 +19,8 @@ public class Ghost : MonoBehaviour
     private AudioSource _as;
     [SerializeField] public AudioClip screech;
 
+    private bool dead = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,9 +29,17 @@ public class Ghost : MonoBehaviour
         _as = GetComponent<AudioSource>();
     }
 
+    public void Die()
+    {
+        dead = true;
+        GetComponent<Animator>().SetBool("dying", true);
+        Destroy(gameObject, 1f);
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (dead) return;
         Vector2 targetV = new Vector2(target.transform.position.x, target.transform.position.z);
         Vector2 myV = new Vector2(transform.position.x, transform.position.z);
         Vector2 delta = targetV - myV;

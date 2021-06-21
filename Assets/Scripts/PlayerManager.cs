@@ -138,7 +138,7 @@ public class PlayerManager : MonoBehaviour
     void OnTriggerEnter(Collider collision)
     {
         //Debug.Log("COLLIDED");
-        if (collision.gameObject.tag == "Sprite")
+        if (collision.gameObject.tag == "Ghost")
         {
             ghostList.Add(collision.gameObject);
         }
@@ -153,10 +153,15 @@ public class PlayerManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E))
         {
+            List<GameObject> toRemove = new List<GameObject>();
             foreach (GameObject obj in ghostList)
             {
+                obj.GetComponent<Ghost>().Die();
+                toRemove.Add(obj);
+            }
+            foreach (GameObject obj in toRemove)
+            {
                 ghostList.Remove(obj);
-                Destroy(obj);
             }
         }
     }
