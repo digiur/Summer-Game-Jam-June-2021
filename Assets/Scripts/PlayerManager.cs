@@ -42,7 +42,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     int iceProbability;
     [SerializeField]
-    float winTime;
+    float winDistance = 10f;
     [SerializeField]
     float spawnSpread;
     [SerializeField]
@@ -71,7 +71,6 @@ public class PlayerManager : MonoBehaviour
         tc = rig.GetComponent<TransitionController>();
 
         pc.blowTopDown();
-        StartCoroutine(startWinCounter(winTime));
         ghostProb = ghostProbability;
         windProb = windProbability;
         iceProb = iceProbability;
@@ -79,6 +78,10 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
+        if (player.transform.position.z > winDistance)
+        {
+            win = true;
+        }
         //Start Spawning Events
         if (!checkingProb)
         {
