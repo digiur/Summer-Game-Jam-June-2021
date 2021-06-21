@@ -12,6 +12,8 @@ public class Ghost : MonoBehaviour
     private float epsilon;
     [SerializeField]
     private float horizontalClamp;
+    [SerializeField]
+    private float deadlyRange;
     private GameObject target;
     private PlayerManager pm;
     private AudioSource _as;
@@ -40,26 +42,27 @@ public class Ghost : MonoBehaviour
 
         transform.position = new Vector3(myV.x, transform.position.y, myV.y);
 
-        if((transform.position.x - target.transform.position.x) < .5 &&
-            (transform.position.y - target.transform.position.y) < .5 &&
-            (transform.position.z - target.transform.position.z) < .5){
+        if ((transform.position - target.transform.position).magnitude < deadlyRange)
+        {
             StartCoroutine(DestroyScreech());
             pm.takeDamage();
         }
     }
 
-    void OnDestroy(){
+    void OnDestroy()
+    {
 
     }
 
-    public IEnumerator DestroyScreech(){
+    public IEnumerator DestroyScreech()
+    {
         _as.clip = screech;
         _as.PlayOneShot(_as.clip);
 
         yield return new WaitForSeconds(0.5f);
 
         Destroy(this.gameObject);
-        
+
     }
 
 }
