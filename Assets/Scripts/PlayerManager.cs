@@ -20,12 +20,14 @@ public class PlayerManager : MonoBehaviour
     bool creatingFootsteps = false;
     bool windActive = false;
     bool win = false;
+    bool transitioned = false;
 
     private GameObject player;
     private Footsteps FootstepsScript;
     private GameObject rig;
     private MovementController mc;
     private ParticleController pc;
+    private TransitionController tc;
 
     int result = -1;
 
@@ -55,6 +57,8 @@ public class PlayerManager : MonoBehaviour
     float iceDuration;
     [SerializeField]
     float iceRange;
+    [SerializeField]
+    string winStage;
     int lives = 3;
 
     void Start()
@@ -64,6 +68,7 @@ public class PlayerManager : MonoBehaviour
         rig = GameObject.FindGameObjectWithTag("Rig");
         mc = rig.GetComponent<MovementController>();
         pc = rig.GetComponent<ParticleController>();
+        tc = rig.GetComponent<TransitionController>();
 
         pc.blowTopDown();
         StartCoroutine(startWinCounter(winTime));
@@ -85,9 +90,10 @@ public class PlayerManager : MonoBehaviour
         //Raise Lamp
         raiseLamp();
 
-        if (win)
+        if (win && !transitioned)
         {
-            Debug.Log("YOU WON");
+            transitioned = true;
+            tc.Transition(winStage);
         }
 
     }
@@ -128,7 +134,7 @@ public class PlayerManager : MonoBehaviour
     //COLLISION
     void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("COLLIDED");
+        //Debug.Log("COLLIDED");
         if (collision.gameObject.tag == "Sprite")
         {
             ghostList.Add(collision.gameObject);
@@ -252,11 +258,15 @@ public class PlayerManager : MonoBehaviour
         if (((player.transform.position.x - iceCrack.transform.position.x) <= iceRange) &&
             ((player.transform.position.x - iceCrack.transform.position.x) >= -iceRange))
         {
-            Debug.Log("You Have fallen in the ice crack");
+            if (!transitioned)
+            {
+                transitioned = true;
+                tc.Transition("FellInIce");
+            }
         }
         else
         {
-            Debug.Log("You have bypassed the ice crack");
+            //Debug.Log("You have bypassed the ice crack");
         }
         mc.iceCracked = false;
         yield return null;
@@ -271,11 +281,15 @@ public class PlayerManager : MonoBehaviour
     //External use methods
     public void takeDamage()
     {
-        Debug.Log("Take Damage");
+        //Debug.Log("Take Damage");
         lives -= 1;
         if (lives == 0)
         {
-            Debug.Log("YOU DIED");
+            if (!transitioned)
+            {
+                transitioned = true;
+                tc.Transition("EatenByGhosts");
+            }
         }
     }
 
