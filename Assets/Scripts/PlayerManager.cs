@@ -33,6 +33,8 @@ public class PlayerManager : MonoBehaviour
     int ghostProb = 10;
     int iceProb = 50;
 
+    int lives = 3;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -211,6 +213,10 @@ public class PlayerManager : MonoBehaviour
     //External use methods
     public void takeDamage(){
         Debug.Log("Take Damage");
+        lives -= 1;
+        if(lives == 0){
+            Debug.Log("YOU DIED");
+        }
     }
 
 }
