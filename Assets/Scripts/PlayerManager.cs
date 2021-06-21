@@ -8,23 +8,32 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public GameObject wind;
     [SerializeField] public GameObject crack;
 
+    [SerializeField]
+    private Transform rightTransform;
+    [SerializeField]
+    private Transform leftTransform;
+
     private List<GameObject> ghostList = new List<GameObject>();
 
     bool walking = false;
     bool checkingProb = false;
     bool creatingFootsteps = false;
     bool windActive = false;
+    bool win = false;
 
     private GameObject player;
     private Footsteps FootstepsScript;
     private GameObject rig;
     private MovementController mc;
+    private ParticleController pc;
 
     int result = -1;
 
-    int windProb = 10;
+    int windProb = 50;
     int ghostProb = 10;
-    int iceProb = 10;
+    int iceProb = 50;
+
+    int lives = 3;
 
     void Start()
     {
@@ -32,7 +41,12 @@ public class PlayerManager : MonoBehaviour
         FootstepsScript = player.GetComponent<Footsteps>();
         rig = GameObject.FindGameObjectWithTag("Rig");
         mc = rig.GetComponent<MovementController>();
+        pc = rig.GetComponent<ParticleController>();
 
+
+
+        pc.blowTopDown();
+        StartCoroutine(startWinCounter(12));
     }
 
     void Update()
@@ -46,6 +60,10 @@ public class PlayerManager : MonoBehaviour
 
         //Raise Lamp
         raiseLamp();
+
+        if(win){
+            Debug.Log("YOU WON");
+        }
 
     }
 
@@ -62,6 +80,17 @@ public class PlayerManager : MonoBehaviour
     }
 
     private void SpawnIce(){
+        int rightOrLeft = Random.Range(0,100);
+        mc.iceCracked = true;
+        if(rightOrLeft <= 50){
+                Vector3 pos = rightTransform.position;
+                pos.z += 1;
+                StartCoroutine(crackIce(Instantiate(crack, pos, Quaternion.identity)));
+        } else {
+            Vector3 pos = leftTransform.position;
+            pos.z += 1;
+            StartCoroutine(crackIce(Instantiate(crack, pos, Quaternion.identity)));
+        }
 
     }
 
@@ -70,6 +99,9 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("COLLIDED");
         if(collision.gameObject.tag == "Sprite"){
             ghostList.Add(collision.gameObject);
+        }
+        if(collision.gameObject.tag == "crack"){
+            
         }
     }
 
@@ -106,15 +138,16 @@ public class PlayerManager : MonoBehaviour
                 if(result != -1){
                     if(result == 0 && !windActive){
                         //spawn wind
-                        windProb = 20;
+                        windProb = 50;
                         SpawnWind();
                         //Debug.Log("SPAWNED WIND");
                     } else if(result == 1){
                         //spawn ghost
-                        ghostProb = 20;
+                        ghostProb = 10;
                         SpawnGhost();
                     } else if(result == 2){
-                        iceProb =20;
+                        iceProb = 50;
+                        SpawnIce();
                         //Debug.Log("SPAWNED ICE");
                     }
                     checkingProb = false;
@@ -140,24 +173,50 @@ public class PlayerManager : MonoBehaviour
 
         public IEnumerator windHowling(int duration){
             windActive = true;
-            int direction = Random.Range(0,1);
+            int direction = Random.Range(0,100);
             GameObject windOBJ = Instantiate(wind, new Vector3(0,0,0), Quaternion.identity);
-            if(direction == 0){
+            if(direction <= 50){
                 mc.windLeft = true;
+                pc.blowRightToLeft();
             } else {
                 mc.windRight = true;
+                pc.blowLeftToRight();
             }
             yield return new WaitForSeconds(duration);
             mc.windLeft = false;
             mc.windRight = false;
             Destroy(windOBJ);
+            pc.blowTopDown();
             windActive = false;
 
+        }
+
+        public IEnumerator crackIce(GameObject iceCrack){
+            yield return new WaitForSeconds(3);
+            if(((player.transform.position.x - iceCrack.transform.position.x) <= 0.7f) &&
+                ((player.transform.position.x - iceCrack.transform.position.x) >= -0.7f)){
+
+                Debug.Log("You Have fallen in the ice crack");
+            }
+            else{
+                Debug.Log("You have bypassed the ice crack");
+            }
+            mc.iceCracked = false;
+            yield return null;
+        }
+
+        public IEnumerator startWinCounter(int durationToWin){
+            yield return new WaitForSeconds(durationToWin);
+            win = true;
         }
 
     //External use methods
     public void takeDamage(){
         Debug.Log("Take Damage");
+        lives -= 1;
+        if(lives == 0){
+            Debug.Log("YOU DIED");
+        }
     }
 
 }
