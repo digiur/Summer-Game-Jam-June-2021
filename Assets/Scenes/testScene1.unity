@@ -211,8 +211,48 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 589153641, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
+      propertyPath: winTime
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 589153641, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
       propertyPath: iceRange
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 589153641, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
+      propertyPath: iceDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 589153641, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
+      propertyPath: spawnSpread
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 589153641, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
+      propertyPath: windDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 589153641, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
+      propertyPath: spawnDistance
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 589153641, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
+      propertyPath: iceProbability
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 589153641, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
+      propertyPath: windProbability
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 589153641, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
+      propertyPath: ghostProbability
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 589153641, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
+      propertyPath: secondsBetweenFootsteps
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 589153641, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
+      propertyPath: secondsBetweenSpawnAttempts
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9154343886141909813, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
       propertyPath: m_RootOrder
