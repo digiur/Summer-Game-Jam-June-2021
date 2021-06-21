@@ -10,6 +10,10 @@ public class MovementController : MonoBehaviour
     private float backSpeed;
     [SerializeField]
     private float turnSpeed;
+    [SerializeField]
+    private float windMultiplier;
+    [SerializeField]
+    private float lostDistance;
 
     public bool windLeft = false;
     public bool windRight = false;
@@ -48,21 +52,21 @@ public class MovementController : MonoBehaviour
             transform.position = pos;
         }
 
-        if(windLeft){
+        if (windLeft)
+        {
             Vector3 pos = transform.position;
-            pos.x -= turnSpeed/2 * Time.deltaTime;
+            pos.x -= turnSpeed * windMultiplier * Time.deltaTime;
             transform.position = pos;
-            if(pos.x >= 5 || pos.x <= -5){
-                Debug.Log("YOU ARE LOST");
-            }
         }
-        if(windRight){
+        if (windRight)
+        {
             Vector3 pos = transform.position;
-            pos.x += turnSpeed/2 * Time.deltaTime;
+            pos.x += turnSpeed * windMultiplier * Time.deltaTime;
             transform.position = pos;
-            if(pos.x >= 5 || pos.x <= -5){
-                Debug.Log("YOU ARE LOST");
-            }
+        }
+        if (transform.position.x >= lostDistance || transform.position.x <= -lostDistance)
+        {
+            Debug.Log("YOU ARE LOST");
         }
 
 

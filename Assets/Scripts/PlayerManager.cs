@@ -29,10 +29,32 @@ public class PlayerManager : MonoBehaviour
 
     int result = -1;
 
-    int windProb = 50;
-    int ghostProb = 10;
-    int iceProb = 50;
+    int windProb;
+    int ghostProb;
+    int iceProb;
 
+    [SerializeField]
+    int windProbability;
+    [SerializeField]
+    int ghostProbability;
+    [SerializeField]
+    int iceProbability;
+    [SerializeField]
+    float winTime;
+    [SerializeField]
+    float spawnSpread;
+    [SerializeField]
+    float spawnDistance;
+    [SerializeField]
+    float windDuration;
+    [SerializeField]
+    float secondsBetweenSpawnAttempts;
+    [SerializeField]
+    float secondsBetweenFootsteps;
+    [SerializeField]
+    float iceDuration;
+    [SerializeField]
+    float iceRange;
     int lives = 3;
 
     void Start()
@@ -43,17 +65,19 @@ public class PlayerManager : MonoBehaviour
         mc = rig.GetComponent<MovementController>();
         pc = rig.GetComponent<ParticleController>();
 
-
-
         pc.blowTopDown();
-        StartCoroutine(startWinCounter(12));
+        StartCoroutine(startWinCounter(winTime));
+        ghostProb = ghostProbability;
+        windProb = windProbability;
+        iceProb = iceProbability;
     }
 
     void Update()
     {
         //Start Spawning Events
-         if(!checkingProb){
-             StartCoroutine(checkProbability());
+        if (!checkingProb)
+        {
+            StartCoroutine(checkProbability());
         }
 
         Walking();
@@ -61,32 +85,39 @@ public class PlayerManager : MonoBehaviour
         //Raise Lamp
         raiseLamp();
 
-        if(win){
+        if (win)
+        {
             Debug.Log("YOU WON");
         }
 
     }
 
     //SPAWNING METHODS
-    private void SpawnWind(){
-        StartCoroutine(windHowling(5));
+    private void SpawnWind()
+    {
+        StartCoroutine(windHowling(windDuration));
     }
 
-    private void SpawnGhost(){
-       // Debug.Log("SPAWNED GHOST");
-        Instantiate(ghost, new Vector3((player.transform.position.x + Random.Range(-7, 7)),
-                                                (player.transform.position.y), 
-                                                (player.transform.position.z + 15)), Quaternion.identity);
+    private void SpawnGhost()
+    {
+        // Debug.Log("SPAWNED GHOST");
+        Instantiate(ghost, new Vector3((player.transform.position.x + Random.Range(-spawnSpread, spawnSpread)),
+                                                (player.transform.position.y),
+                                                (player.transform.position.z + spawnDistance)), Quaternion.identity);
     }
 
-    private void SpawnIce(){
-        int rightOrLeft = Random.Range(0,100);
+    private void SpawnIce()
+    {
+        int rightOrLeft = Random.Range(0, 100);
         mc.iceCracked = true;
-        if(rightOrLeft <= 50){
-                Vector3 pos = rightTransform.position;
-                pos.z += 1;
-                StartCoroutine(crackIce(Instantiate(crack, pos, Quaternion.identity)));
-        } else {
+        if (rightOrLeft <= 50)
+        {
+            Vector3 pos = rightTransform.position;
+            pos.z += 1;
+            StartCoroutine(crackIce(Instantiate(crack, pos, Quaternion.identity)));
+        }
+        else
+        {
             Vector3 pos = leftTransform.position;
             pos.z += 1;
             StartCoroutine(crackIce(Instantiate(crack, pos, Quaternion.identity)));
@@ -95,20 +126,26 @@ public class PlayerManager : MonoBehaviour
     }
 
     //COLLISION
-    void OnTriggerEnter(Collider collision){
+    void OnTriggerEnter(Collider collision)
+    {
         Debug.Log("COLLIDED");
-        if(collision.gameObject.tag == "Sprite"){
+        if (collision.gameObject.tag == "Sprite")
+        {
             ghostList.Add(collision.gameObject);
         }
-        if(collision.gameObject.tag == "crack"){
-            
+        if (collision.gameObject.tag == "crack")
+        {
+
         }
     }
 
     //REACTION METHODS
-    private void raiseLamp(){
-        if(Input.GetKey(KeyCode.E)){
-            foreach(GameObject obj in ghostList){
+    private void raiseLamp()
+    {
+        if (Input.GetKey(KeyCode.E))
+        {
+            foreach (GameObject obj in ghostList)
+            {
                 ghostList.Remove(obj);
                 Destroy(obj);
             }
@@ -116,10 +153,13 @@ public class PlayerManager : MonoBehaviour
     }
 
     //MOVEMENT
-    void Walking(){
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)){
+    void Walking()
+    {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
             walking = true;
-            if(!creatingFootsteps){
+            if (!creatingFootsteps)
+            {
                 StartCoroutine(createFootsteps());
             }
         }
@@ -128,93 +168,113 @@ public class PlayerManager : MonoBehaviour
 
     //IEnumerators
 
-        public IEnumerator checkProbability(){
+    public IEnumerator checkProbability()
+    {
         checkingProb = true;
         bool runLoop = true;
 
-            while(runLoop){
-                result = GameManager.EventProbabilityCounter(windProb, ghostProb, iceProb);
-                //Debug.Log(result);
-                if(result != -1){
-                    if(result == 0 && !windActive){
-                        //spawn wind
-                        windProb = 50;
-                        SpawnWind();
-                        //Debug.Log("SPAWNED WIND");
-                    } else if(result == 1){
-                        //spawn ghost
-                        ghostProb = 10;
-                        SpawnGhost();
-                    } else if(result == 2){
-                        iceProb = 50;
-                        SpawnIce();
-                        //Debug.Log("SPAWNED ICE");
-                    }
-                    checkingProb = false;
-                    runLoop = false;
-                    yield return result;
-                } else{
-                    windProb--;
-                    ghostProb--;
-                    iceProb--;
-                    yield return new WaitForSeconds(1);
+        while (runLoop)
+        {
+            result = GameManager.EventProbabilityCounter(windProb, ghostProb, iceProb);
+            //Debug.Log(result);
+            if (result != -1)
+            {
+                if (result == 0 && !windActive)
+                {
+                    //spawn wind
+                    windProb = windProbability;
+                    SpawnWind();
+                    //Debug.Log("SPAWNED WIND");
                 }
+                else if (result == 1)
+                {
+                    //spawn ghost
+                    ghostProb = ghostProbability;
+                    SpawnGhost();
+                }
+                else if (result == 2)
+                {
+                    iceProb = iceProbability;
+                    SpawnIce();
+                    //Debug.Log("SPAWNED ICE");
+                }
+                checkingProb = false;
+                runLoop = false;
+                yield return result;
+            }
+            else
+            {
+                windProb--;
+                ghostProb--;
+                iceProb--;
+                yield return new WaitForSeconds(secondsBetweenSpawnAttempts);
             }
         }
+    }
 
-        public IEnumerator createFootsteps(){
-            while(walking){
-                creatingFootsteps = true;
-                FootstepsScript.makeFootstep();
-                yield return new WaitForSeconds(1);
-            }
-            creatingFootsteps = false;
+    public IEnumerator createFootsteps()
+    {
+        while (walking)
+        {
+            creatingFootsteps = true;
+            FootstepsScript.makeFootstep();
+            yield return new WaitForSeconds(secondsBetweenFootsteps);
         }
+        creatingFootsteps = false;
+    }
 
-        public IEnumerator windHowling(int duration){
-            windActive = true;
-            int direction = Random.Range(0,100);
-            GameObject windOBJ = Instantiate(wind, new Vector3(0,0,0), Quaternion.identity);
-            if(direction <= 50){
-                mc.windLeft = true;
-                pc.blowRightToLeft();
-            } else {
-                mc.windRight = true;
-                pc.blowLeftToRight();
-            }
-            yield return new WaitForSeconds(duration);
-            mc.windLeft = false;
-            mc.windRight = false;
-            Destroy(windOBJ);
-            pc.blowTopDown();
-            windActive = false;
-
+    public IEnumerator windHowling(float duration)
+    {
+        windActive = true;
+        int direction = Random.Range(0, 100);
+        GameObject windOBJ = Instantiate(wind, new Vector3(0, 0, 0), Quaternion.identity);
+        if (direction <= 50)
+        {
+            mc.windLeft = true;
+            pc.blowRightToLeft();
         }
-
-        public IEnumerator crackIce(GameObject iceCrack){
-            yield return new WaitForSeconds(3);
-            if(((player.transform.position.x - iceCrack.transform.position.x) <= 0.7f) &&
-                ((player.transform.position.x - iceCrack.transform.position.x) >= -0.7f)){
-
-                Debug.Log("You Have fallen in the ice crack");
-            }
-            else{
-                Debug.Log("You have bypassed the ice crack");
-            }
-            mc.iceCracked = false;
-            yield return null;
+        else
+        {
+            mc.windRight = true;
+            pc.blowLeftToRight();
         }
+        yield return new WaitForSeconds(duration);
+        mc.windLeft = false;
+        mc.windRight = false;
+        Destroy(windOBJ);
+        pc.blowTopDown();
+        windActive = false;
+    }
 
-        public IEnumerator startWinCounter(int durationToWin){
-            yield return new WaitForSeconds(durationToWin);
-            win = true;
+    public IEnumerator crackIce(GameObject iceCrack)
+    {
+        yield return new WaitForSeconds(iceDuration);
+        if (((player.transform.position.x - iceCrack.transform.position.x) <= iceRange) &&
+            ((player.transform.position.x - iceCrack.transform.position.x) >= -iceRange))
+        {
+            Debug.Log("You Have fallen in the ice crack");
         }
+        else
+        {
+            Debug.Log("You have bypassed the ice crack");
+        }
+        mc.iceCracked = false;
+        yield return null;
+    }
+
+    public IEnumerator startWinCounter(float durationToWin)
+    {
+        yield return new WaitForSeconds(durationToWin);
+        win = true;
+    }
 
     //External use methods
-    public void takeDamage(){
+    public void takeDamage()
+    {
         Debug.Log("Take Damage");
         lives -= 1;
-        if(lives == 0){
+        if (lives == 0)
+        {
             Debug.Log("YOU DIED");
         }
     }
