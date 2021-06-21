@@ -58779,6 +58779,7 @@ MonoBehaviour:
   turnSpeed: 0.6
   windLeft: 0
   windRight: 0
+  iceCracked: 0
 --- !u!1 &9154343886159256453
 GameObject:
   m_ObjectHideFlags: 0
