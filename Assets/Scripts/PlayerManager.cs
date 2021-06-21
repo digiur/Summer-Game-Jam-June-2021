@@ -8,6 +8,11 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public GameObject wind;
     [SerializeField] public GameObject crack;
 
+    [SerializeField]
+    private Transform rightTransform;
+    [SerializeField]
+    private Transform leftTransform;
+
     private List<GameObject> ghostList = new List<GameObject>();
 
     bool walking = false;
@@ -19,6 +24,7 @@ public class PlayerManager : MonoBehaviour
     private Footsteps FootstepsScript;
     private GameObject rig;
     private MovementController mc;
+    private ParticleController pc;
 
     int result = -1;
 
@@ -32,7 +38,11 @@ public class PlayerManager : MonoBehaviour
         FootstepsScript = player.GetComponent<Footsteps>();
         rig = GameObject.FindGameObjectWithTag("Rig");
         mc = rig.GetComponent<MovementController>();
+        pc = rig.GetComponent<ParticleController>();
 
+
+
+        pc.blowTopDown();
     }
 
     void Update()
@@ -62,6 +72,16 @@ public class PlayerManager : MonoBehaviour
     }
 
     private void SpawnIce(){
+        int rightOrLeft = Random.Range(0,100);
+        if(rightOrLeft <= 50){
+                Vector3 pos = rightTransform.position;
+                pos.z += 1;
+                StartCoroutine(crackIce(Instantiate(crack, pos, Quaternion.identity)));
+        } else {
+            Vector3 pos = leftTransform.position;
+            pos.z += 1;
+            StartCoroutine(crackIce(Instantiate(crack, pos, Quaternion.identity)));
+        }
 
     }
 
@@ -70,6 +90,9 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("COLLIDED");
         if(collision.gameObject.tag == "Sprite"){
             ghostList.Add(collision.gameObject);
+        }
+        if(collision.gameObject.tag == "crack"){
+            
         }
     }
 
@@ -114,7 +137,8 @@ public class PlayerManager : MonoBehaviour
                         ghostProb = 20;
                         SpawnGhost();
                     } else if(result == 2){
-                        iceProb =20;
+                        iceProb = 20;
+                        SpawnIce();
                         //Debug.Log("SPAWNED ICE");
                     }
                     checkingProb = false;
@@ -140,19 +164,35 @@ public class PlayerManager : MonoBehaviour
 
         public IEnumerator windHowling(int duration){
             windActive = true;
-            int direction = Random.Range(0,1);
+            int direction = Random.Range(0,100);
             GameObject windOBJ = Instantiate(wind, new Vector3(0,0,0), Quaternion.identity);
-            if(direction == 0){
+            if(direction <= 50){
                 mc.windLeft = true;
+                pc.blowRightToLeft();
             } else {
                 mc.windRight = true;
+                pc.blowLeftToRight();
             }
             yield return new WaitForSeconds(duration);
             mc.windLeft = false;
             mc.windRight = false;
             Destroy(windOBJ);
+            pc.blowTopDown();
             windActive = false;
 
+        }
+
+        public IEnumerator crackIce(GameObject iceCrack){
+            yield return new WaitForSeconds(3);
+            if(((player.transform.position.x - iceCrack.transform.position.x) <= 0.7f) &&
+                ((player.transform.position.x - iceCrack.transform.position.x) >= -0.7f)){
+
+                Debug.Log("INSIDE " + (player.transform.position.x - iceCrack.transform.position.x));
+            }
+            else{
+                Debug.Log("OUTSIDE " + (player.transform.position.x - iceCrack.transform.position.x));
+            }
+            yield return null;
         }
 
     //External use methods

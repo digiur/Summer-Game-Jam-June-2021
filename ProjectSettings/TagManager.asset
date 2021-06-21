@@ -9,6 +9,7 @@ TagManager:
   - Sprite
   - Decal
   - Rig
+  - crack
   layers:
   - Default
   - TransparentFX

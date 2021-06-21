@@ -26,39 +26,39 @@ public class ParticleController : MonoBehaviour
     private ParticleSystemForceField forceField;
     [SerializeField]
     private float windSpeed;
+    ParticleSystem.EmissionModule emission;
 
     // Update is called once per frame
     void Update()
     {
-        ParticleSystem.EmissionModule emission;
-        if (Input.GetButton("forward"))
-        {
-            emission = top1.emission;
-            emission.enabled = true;
-            emission = top2.emission;
-            emission.enabled = true;
-            emission = top3.emission;
-            emission.enabled = true;
+        // if (Input.GetButton("back"))
+        // {
+        //     emission = top1.emission;
+        //     emission.enabled = false;
+        //     emission = top2.emission;
+        //     emission.enabled = false;
+        //     emission = top3.emission;
+        //     emission.enabled = false;
 
-            emission = right1.emission;
-            emission.enabled = false;
-            emission = right2.emission;
-            emission.enabled = false;
-            emission = right3.emission;
-            emission.enabled = false;
+        //     emission = right1.emission;
+        //     emission.enabled = false;
+        //     emission = right2.emission;
+        //     emission.enabled = false;
+        //     emission = right3.emission;
+        //     emission.enabled = false;
 
-            emission = left1.emission;
-            emission.enabled = false;
-            emission = left2.emission;
-            emission.enabled = false;
-            emission = left3.emission;
-            emission.enabled = false;
+        //     emission = left1.emission;
+        //     emission.enabled = false;
+        //     emission = left2.emission;
+        //     emission.enabled = false;
+        //     emission = left3.emission;
+        //     emission.enabled = false;
 
-            forceField.directionX = 0f;
-        }
+        //     forceField.directionX = 0;
+        // }
+    }
 
-        if (Input.GetButton("right"))
-        {
+    public void blowRightToLeft(){
             emission = top1.emission;
             emission.enabled = false;
             emission = top2.emission;
@@ -81,10 +81,9 @@ public class ParticleController : MonoBehaviour
             emission.enabled = false;
 
             forceField.directionX = -windSpeed;
-        }
+    }
 
-        if (Input.GetButton("left"))
-        {
+    public void blowLeftToRight(){
             emission = top1.emission;
             emission.enabled = false;
             emission = top2.emission;
@@ -107,15 +106,15 @@ public class ParticleController : MonoBehaviour
             emission.enabled = true;
 
             forceField.directionX = windSpeed;
-        }
-        if (Input.GetButton("back"))
-        {
+    }
+
+    public void blowTopDown(){
             emission = top1.emission;
-            emission.enabled = false;
+            emission.enabled = true;
             emission = top2.emission;
-            emission.enabled = false;
+            emission.enabled = true;
             emission = top3.emission;
-            emission.enabled = false;
+            emission.enabled = true;
 
             emission = right1.emission;
             emission.enabled = false;
@@ -131,7 +130,6 @@ public class ParticleController : MonoBehaviour
             emission = left3.emission;
             emission.enabled = false;
 
-            forceField.directionX = 0;
-        }
+            forceField.directionX = 0f;
     }
 }
