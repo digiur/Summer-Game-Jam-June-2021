@@ -242,6 +242,7 @@ MonoBehaviour:
   speed: 1.2
   epsilon: 0.006
   horizontalClamp: 3
+  screech: {fileID: 0}
 --- !u!1001 &190277663589592783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -306,14 +307,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1273235499, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
-      propertyPath: lengthInSec
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1529976292, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
-      propertyPath: lengthInSec
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 9154343886141909813, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
       propertyPath: m_RootOrder
       value: 0

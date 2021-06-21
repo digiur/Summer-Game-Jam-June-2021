@@ -23,7 +23,7 @@ public class TransitionController : MonoBehaviour
         white.Play();
         yield return new WaitForSeconds(2);
         black.Play();
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3.5f);
         UnityEngine.SceneManagement.SceneManager.LoadScene("StageTwo");
     }
 }
