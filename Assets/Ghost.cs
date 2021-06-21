@@ -49,20 +49,12 @@ public class Ghost : MonoBehaviour
         }
     }
 
-    void OnDestroy()
-    {
-
-    }
-
     public IEnumerator DestroyScreech()
     {
         _as.clip = screech;
         _as.PlayOneShot(_as.clip);
 
-        yield return new WaitForSeconds(0.5f);
-
-        Destroy(this.gameObject);
-
+        yield return null;
     }
 
 }

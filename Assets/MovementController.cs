@@ -15,13 +15,17 @@ public class MovementController : MonoBehaviour
     [SerializeField]
     private float lostDistance;
 
+    private bool transitioned = false;
+
     public bool windLeft = false;
     public bool windRight = false;
     public bool iceCracked = false;
+    private TransitionController tc;
 
     // Start is called before the first frame update
     void Start()
     {
+        tc = GetComponent<TransitionController>();
     }
 
     // Update is called once per frame
@@ -66,9 +70,11 @@ public class MovementController : MonoBehaviour
         }
         if (transform.position.x >= lostDistance || transform.position.x <= -lostDistance)
         {
-            Debug.Log("YOU ARE LOST");
+            if (!transitioned)
+            {
+                transitioned = true;
+                tc.Transition("WentOffCourse");
+            }
         }
-
-
     }
 }
