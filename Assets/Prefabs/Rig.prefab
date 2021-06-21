@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 733417669}
-  - component: {fileID: 733417668}
   m_Layer: 0
   m_Name: Transitions
   m_TagString: Untagged
@@ -35,20 +34,6 @@ Transform:
   m_Father: {fileID: 9154343886141909813}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &733417668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 733417667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17a16155742b98f43a676fac2bb05ddf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  white: {fileID: 1273235499}
-  black: {fileID: 1529976292}
 --- !u!1 &1187554403
 GameObject:
   m_ObjectHideFlags: 0
@@ -63729,6 +63714,7 @@ GameObject:
   - component: {fileID: 9154343886141909814}
   - component: {fileID: 4938274773075105462}
   - component: {fileID: 2137760648}
+  - component: {fileID: 456107330724125423}
   m_Layer: 0
   m_Name: Rig
   m_TagString: Rig
@@ -63776,6 +63762,7 @@ MonoBehaviour:
   backSpeed: 0.6
   turnSpeed: 0.6
   windMultiplier: 1
+  lostDistance: 3
   windLeft: 0
   windRight: 0
   iceCracked: 0
@@ -63898,6 +63885,20 @@ MonoBehaviour:
   right3: {fileID: 442440940584964912}
   forceField: {fileID: 1921669720121536001}
   windSpeed: 5
+--- !u!114 &456107330724125423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9154343886141909815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a16155742b98f43a676fac2bb05ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  white: {fileID: 1273235499}
+  black: {fileID: 1529976292}
 --- !u!1 &9154343886827741551
 GameObject:
   m_ObjectHideFlags: 0
@@ -63949,7 +63950,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78b6017f59f6f64c855ab9d412d351c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenSteps: 1
   footstepPrefab: {fileID: 2906708612206094973, guid: 59639cbc00cc86043b7a94cdb16648b3, type: 3}
   rightTransform: {fileID: 1377076992}
   leftTransform: {fileID: 1408797501}
@@ -64108,6 +64108,18 @@ MonoBehaviour:
   crack: {fileID: 186346140596651821, guid: 8a1fbb28e1c5bc5448dfe52e26985e52, type: 3}
   rightTransform: {fileID: 1377076992}
   leftTransform: {fileID: 1408797501}
+  windProbability: 50
+  ghostProbability: 10
+  iceProbability: 50
+  winTime: 5
+  spawnSpread: 7
+  spawnDistance: 15
+  windDuration: 5
+  secondsBetweenSpawnAttempts: 1
+  secondsBetweenFootsteps: 1
+  iceDuration: 3
+  iceRange: 0.5
+  winStage: Win
 --- !u!1 &9154343886857936080
 GameObject:
   m_ObjectHideFlags: 0
@@ -64180,7 +64192,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.5660378, g: 0.23709504, b: 0.5112396, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
