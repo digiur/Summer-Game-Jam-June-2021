@@ -242,6 +242,7 @@ MonoBehaviour:
   speed: 1.2
   epsilon: 0.006
   horizontalClamp: 3
+  deadlyRange: 0
   screech: {fileID: 0}
 --- !u!1001 &190277663589592783
 PrefabInstance:

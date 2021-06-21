@@ -12,10 +12,14 @@ public class Ghost : MonoBehaviour
     private float epsilon;
     [SerializeField]
     private float horizontalClamp;
+    [SerializeField]
+    private float deadlyRange;
     private GameObject target;
     private PlayerManager pm;
     private AudioSource _as;
     [SerializeField] public AudioClip screech;
+
+    private bool dead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +29,17 @@ public class Ghost : MonoBehaviour
         _as = GetComponent<AudioSource>();
     }
 
+    public void Die()
+    {
+        dead = true;
+        GetComponent<Animator>().SetBool("dying", true);
+        Destroy(gameObject, 1f);
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (dead) return;
         Vector2 targetV = new Vector2(target.transform.position.x, target.transform.position.z);
         Vector2 myV = new Vector2(transform.position.x, transform.position.z);
         Vector2 delta = targetV - myV;
@@ -40,26 +52,19 @@ public class Ghost : MonoBehaviour
 
         transform.position = new Vector3(myV.x, transform.position.y, myV.y);
 
-        if((transform.position.x - target.transform.position.x) < .5 &&
-            (transform.position.y - target.transform.position.y) < .5 &&
-            (transform.position.z - target.transform.position.z) < .5){
+        if ((transform.position - target.transform.position).magnitude < deadlyRange)
+        {
             StartCoroutine(DestroyScreech());
             pm.takeDamage();
         }
     }
 
-    void OnDestroy(){
-
-    }
-
-    public IEnumerator DestroyScreech(){
+    public IEnumerator DestroyScreech()
+    {
         _as.clip = screech;
         _as.PlayOneShot(_as.clip);
 
-        yield return new WaitForSeconds(0.5f);
-
-        Destroy(this.gameObject);
-        
+        yield return null;
     }
 
 }

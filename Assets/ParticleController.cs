@@ -26,112 +26,109 @@ public class ParticleController : MonoBehaviour
     private ParticleSystemForceField forceField;
     [SerializeField]
     private float windSpeed;
+    ParticleSystem.EmissionModule emission;
 
-    // Update is called once per frame
-    void Update()
+    void stop()
     {
-        ParticleSystem.EmissionModule emission;
-        if (Input.GetButton("forward"))
-        {
-            emission = top1.emission;
-            emission.enabled = true;
-            emission = top2.emission;
-            emission.enabled = true;
-            emission = top3.emission;
-            emission.enabled = true;
+        emission = top1.emission;
+        emission.enabled = false;
+        emission = top2.emission;
+        emission.enabled = false;
+        emission = top3.emission;
+        emission.enabled = false;
 
-            emission = right1.emission;
-            emission.enabled = false;
-            emission = right2.emission;
-            emission.enabled = false;
-            emission = right3.emission;
-            emission.enabled = false;
+        emission = right1.emission;
+        emission.enabled = false;
+        emission = right2.emission;
+        emission.enabled = false;
+        emission = right3.emission;
+        emission.enabled = false;
 
-            emission = left1.emission;
-            emission.enabled = false;
-            emission = left2.emission;
-            emission.enabled = false;
-            emission = left3.emission;
-            emission.enabled = false;
+        emission = left1.emission;
+        emission.enabled = false;
+        emission = left2.emission;
+        emission.enabled = false;
+        emission = left3.emission;
+        emission.enabled = false;
 
-            forceField.directionX = 0f;
-        }
+        forceField.directionX = 0;
+    }
 
-        if (Input.GetButton("right"))
-        {
-            emission = top1.emission;
-            emission.enabled = false;
-            emission = top2.emission;
-            emission.enabled = false;
-            emission = top3.emission;
-            emission.enabled = false;
+    public void blowRightToLeft()
+    {
+        emission = top1.emission;
+        emission.enabled = false;
+        emission = top2.emission;
+        emission.enabled = false;
+        emission = top3.emission;
+        emission.enabled = false;
 
-            emission = right1.emission;
-            emission.enabled = true;
-            emission = right2.emission;
-            emission.enabled = true;
-            emission = right3.emission;
-            emission.enabled = true;
+        emission = right1.emission;
+        emission.enabled = true;
+        emission = right2.emission;
+        emission.enabled = true;
+        emission = right3.emission;
+        emission.enabled = true;
 
-            emission = left1.emission;
-            emission.enabled = false;
-            emission = left2.emission;
-            emission.enabled = false;
-            emission = left3.emission;
-            emission.enabled = false;
+        emission = left1.emission;
+        emission.enabled = false;
+        emission = left2.emission;
+        emission.enabled = false;
+        emission = left3.emission;
+        emission.enabled = false;
 
-            forceField.directionX = -windSpeed;
-        }
+        forceField.directionX = -windSpeed;
+    }
 
-        if (Input.GetButton("left"))
-        {
-            emission = top1.emission;
-            emission.enabled = false;
-            emission = top2.emission;
-            emission.enabled = false;
-            emission = top3.emission;
-            emission.enabled = false;
+    public void blowLeftToRight()
+    {
+        emission = top1.emission;
+        emission.enabled = false;
+        emission = top2.emission;
+        emission.enabled = false;
+        emission = top3.emission;
+        emission.enabled = false;
 
-            emission = right1.emission;
-            emission.enabled = false;
-            emission = right2.emission;
-            emission.enabled = false;
-            emission = right3.emission;
-            emission.enabled = false;
+        emission = right1.emission;
+        emission.enabled = false;
+        emission = right2.emission;
+        emission.enabled = false;
+        emission = right3.emission;
+        emission.enabled = false;
 
-            emission = left1.emission;
-            emission.enabled = true;
-            emission = left2.emission;
-            emission.enabled = true;
-            emission = left3.emission;
-            emission.enabled = true;
+        emission = left1.emission;
+        emission.enabled = true;
+        emission = left2.emission;
+        emission.enabled = true;
+        emission = left3.emission;
+        emission.enabled = true;
 
-            forceField.directionX = windSpeed;
-        }
-        if (Input.GetButton("back"))
-        {
-            emission = top1.emission;
-            emission.enabled = false;
-            emission = top2.emission;
-            emission.enabled = false;
-            emission = top3.emission;
-            emission.enabled = false;
+        forceField.directionX = windSpeed;
+    }
 
-            emission = right1.emission;
-            emission.enabled = false;
-            emission = right2.emission;
-            emission.enabled = false;
-            emission = right3.emission;
-            emission.enabled = false;
+    public void blowTopDown()
+    {
+        emission = top1.emission;
+        emission.enabled = true;
+        emission = top2.emission;
+        emission.enabled = true;
+        emission = top3.emission;
+        emission.enabled = true;
 
-            emission = left1.emission;
-            emission.enabled = false;
-            emission = left2.emission;
-            emission.enabled = false;
-            emission = left3.emission;
-            emission.enabled = false;
+        emission = right1.emission;
+        emission.enabled = false;
+        emission = right2.emission;
+        emission.enabled = false;
+        emission = right3.emission;
+        emission.enabled = false;
 
-            forceField.directionX = 0;
-        }
+        emission = left1.emission;
+        emission.enabled = false;
+        emission = left2.emission;
+        emission.enabled = false;
+        emission = left3.emission;
+        emission.enabled = false;
+
+        forceField.directionX = 0f;
     }
 }

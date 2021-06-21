@@ -26,8 +26,15 @@ public class PerspectiveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject[] sprites = GameObject.FindGameObjectsWithTag("Sprite");
+        GameObject[] ghosts = GameObject.FindGameObjectsWithTag("Ghost");
+        GameObject[] others = GameObject.FindGameObjectsWithTag("Sprite");
         GameObject[] decals = GameObject.FindGameObjectsWithTag("Decal");
+
+        GameObject[] sprites = new GameObject[ghosts.Length + others.Length];
+        ghosts.CopyTo(sprites, 0);
+        others.CopyTo(sprites, ghosts.Length);
+
+
         Vector3 myPos = transform.position;
         float worldFar = myPos.z + farDistance;
         float worldNear = myPos.z - nearDistance;

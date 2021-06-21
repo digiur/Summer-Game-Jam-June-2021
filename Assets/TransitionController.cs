@@ -8,22 +8,34 @@ public class TransitionController : MonoBehaviour
     private ParticleSystem white;
     [SerializeField]
     private ParticleSystem black;
+    [SerializeField]
+    private bool autoTransitionToMainMenu = false;
+    [SerializeField]
+    private float autoWaitTime = 0f;
+
+    private bool transitioned = false;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Debug Reset"))
+        if (autoTransitionToMainMenu && (autoWaitTime -= Time.deltaTime) <= 0 && !transitioned)
         {
-            StartCoroutine(Transition());
+            transitioned = true;
+            StartCoroutine(TransitionRoutine("MainMenu"));
         }
     }
 
-    IEnumerator Transition()
+    public void Transition(string scene)
+    {
+        StartCoroutine(TransitionRoutine(scene));
+    }
+
+    IEnumerator TransitionRoutine(string scene)
     {
         white.Play();
         yield return new WaitForSeconds(2);
         black.Play();
         yield return new WaitForSeconds(3.5f);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("StageTwo");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
     }
 }

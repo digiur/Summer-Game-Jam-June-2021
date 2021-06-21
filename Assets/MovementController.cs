@@ -10,19 +10,28 @@ public class MovementController : MonoBehaviour
     private float backSpeed;
     [SerializeField]
     private float turnSpeed;
+    [SerializeField]
+    private float windMultiplier;
+    [SerializeField]
+    private float lostDistance;
+
+    private bool transitioned = false;
 
     public bool windLeft = false;
     public bool windRight = false;
+    public bool iceCracked = false;
+    private TransitionController tc;
 
     // Start is called before the first frame update
     void Start()
     {
+        tc = GetComponent<TransitionController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("forward"))
+        if (Input.GetButton("forward") && !iceCracked)
         {
             Vector3 pos = transform.position;
             pos.z += walkSpeed * Time.deltaTime;
@@ -47,23 +56,25 @@ public class MovementController : MonoBehaviour
             transform.position = pos;
         }
 
-        if(windLeft){
+        if (windLeft)
+        {
             Vector3 pos = transform.position;
-            pos.x -= turnSpeed/2 * Time.deltaTime;
+            pos.x -= turnSpeed * windMultiplier * Time.deltaTime;
             transform.position = pos;
-            if(pos.x >= 5 || pos.x <= -5){
-                Debug.Log("YOU ARE LOST");
+        }
+        if (windRight)
+        {
+            Vector3 pos = transform.position;
+            pos.x += turnSpeed * windMultiplier * Time.deltaTime;
+            transform.position = pos;
+        }
+        if (transform.position.x >= lostDistance || transform.position.x <= -lostDistance)
+        {
+            if (!transitioned)
+            {
+                transitioned = true;
+                tc.Transition("WentOffCourse");
             }
         }
-        if(windRight){
-            Vector3 pos = transform.position;
-            pos.x += turnSpeed/2 * Time.deltaTime;
-            transform.position = pos;
-            if(pos.x >= 5 || pos.x <= -5){
-                Debug.Log("YOU ARE LOST");
-            }
-        }
-
-
     }
 }
