@@ -26,4 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EatenByGhosts.unity
     guid: a00fb4114be8ff64c9053b7d16f6e8f6
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: e93cad2194a73a248b3219b52e71566c
+  - enabled: 1
+    path: Assets/Scenes/Forest.unity
+    guid: d33abf987fa87474da3f066e48045d3a
   m_configObjects: {}

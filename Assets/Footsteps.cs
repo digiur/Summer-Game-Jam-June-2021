@@ -25,21 +25,19 @@ public class Footsteps : MonoBehaviour
 
     public void makeFootstep()
     {
+        _as.clip = audioClipArray[UnityEngine.Random.Range(0, audioClipArray.Length)];
+        _as.PlayOneShot(_as.clip, 0.33f);
         if (right)
         {
             Vector3 pos = rightTransform.position;
             pos.z += forwardOffset;
             Instantiate(footstepPrefab, pos, Quaternion.identity);
-            _as.clip = audioClipArray[UnityEngine.Random.Range(0, audioClipArray.Length)];
-            _as.PlayOneShot(_as.clip);
         }
         else
         {
             Vector3 pos = leftTransform.position;
             pos.z += forwardOffset;
             Instantiate(footstepPrefab, pos, Quaternion.identity);
-            _as.clip = audioClipArray[UnityEngine.Random.Range(0, audioClipArray.Length)];
-            _as.PlayOneShot(_as.clip);
         }
         right = !right;
     }

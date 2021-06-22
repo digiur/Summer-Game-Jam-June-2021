@@ -58,11 +58,12 @@ public class Ghost : MonoBehaviour
 
         if ((transform.position - target.transform.position).magnitude < deadlyRange)
         {
-            if(counter == 0){
-            StartCoroutine(DestroyScreech());
-            counter = 1;
+            if (counter == 0)
+            {
+                StartCoroutine(DestroyScreech());
+                counter = 1;
             }
-            
+
         }
     }
 
@@ -71,12 +72,11 @@ public class Ghost : MonoBehaviour
         int counter = 0;
         _as.clip = screech;
         _as.PlayOneShot(_as.clip);
-        if(counter == 0){
+        if (counter == 0)
+        {
             pm.takeDamage();
-            counter =1;
+            counter = 1;
         }
-        yield return new WaitForSeconds(1f);
-        Destroy(this.gameObject);
         yield return null;
     }
 

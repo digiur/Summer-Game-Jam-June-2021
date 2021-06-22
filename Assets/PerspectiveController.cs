@@ -27,6 +27,7 @@ public class PerspectiveController : MonoBehaviour
     void Update()
     {
         GameObject[] ghosts = GameObject.FindGameObjectsWithTag("Ghost");
+        GameObject[] cracks = GameObject.FindGameObjectsWithTag("crack");
         GameObject[] others = GameObject.FindGameObjectsWithTag("Sprite");
         GameObject[] decals = GameObject.FindGameObjectsWithTag("Decal");
 
@@ -75,6 +76,34 @@ public class PerspectiveController : MonoBehaviour
             float t = Mathf.InverseLerp(myPos.z + epsilon, worldNear, decalPos.z);
             newScale.x = Mathf.Lerp(minScaleDecal, maxScaleDecal, t);
             newScale.y = Mathf.Lerp(0, maxScaleDecal, t);
+            decal.transform.localScale = newScale;
+
+            if (decalPos.z < worldFar && decalPos.z > myPos.z + epsilon)
+            {
+                //far y
+                Vector3 newPosition = decalPos;
+                t = Mathf.InverseLerp(worldFar, myPos.z + epsilon, newPosition.z);
+                newPosition.y = t * myPos.y - epsilon;
+                decal.transform.position = newPosition;
+            }
+            if (decalPos.z < myPos.z - epsilon && decalPos.z > worldNear)
+            {
+                //near y
+                Vector3 newPosition = decalPos;
+                t = Mathf.InverseLerp(myPos.z - epsilon, worldNear, newPosition.z);
+                newPosition.y = myPos.y - (4 * t * t * myPos.y) - epsilon;
+                decal.transform.position = newPosition;
+            }
+        }
+        foreach (GameObject decal in cracks)
+        {
+            Vector3 decalPos = decal.transform.position;
+
+            //scale
+            Vector3 newScale = decal.transform.localScale;
+            float t = Mathf.InverseLerp(myPos.z + epsilon, worldNear, decalPos.z);
+            newScale.x = Mathf.Lerp(minScaleDecal, maxScaleDecal + 2, t);
+            newScale.y = Mathf.Lerp(0, maxScaleDecal + 2, t);
             decal.transform.localScale = newScale;
 
             if (decalPos.z < worldFar && decalPos.z > myPos.z + epsilon)

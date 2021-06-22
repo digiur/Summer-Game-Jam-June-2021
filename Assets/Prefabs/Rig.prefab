@@ -14695,7 +14695,7 @@ MonoBehaviour:
   footstepPrefab: {fileID: 2906708612206094973, guid: 59639cbc00cc86043b7a94cdb16648b3, type: 3}
   rightTransform: {fileID: 9212684112029681766}
   leftTransform: {fileID: 4331134535141915300}
-  forwardOffset: 0.95
+  forwardOffset: 1.2
   audioClipArray:
   - {fileID: 8300000, guid: cf6a75f6d7b53d645a9eb1ea576e55a2, type: 3}
   - {fileID: 8300000, guid: 8a33197c0c346594d871bc97da3f5384, type: 3}

@@ -296,16 +296,11 @@ public class PlayerManager : MonoBehaviour
     //External use methods
     public void takeDamage()
     {
-        Debug.Log("Take Damage");
-        lives -= 1;
-        if (lives == 0)
+        dying = true;
+        if (!transitioned)
         {
-            dying = true;
-            if (!transitioned)
-            {
-                transitioned = true;
-                tc.Transition("EatenByGhosts");
-            }
+            transitioned = true;
+            tc.Transition("EatenByGhosts");
         }
     }
 
