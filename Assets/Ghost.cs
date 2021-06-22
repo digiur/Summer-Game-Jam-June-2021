@@ -18,6 +18,7 @@ public class Ghost : MonoBehaviour
     private PlayerManager pm;
     private AudioSource _as;
     [SerializeField] public AudioClip screech;
+    [SerializeField] public AudioClip deathSound;
 
     private bool dead = false;
 
@@ -33,6 +34,8 @@ public class Ghost : MonoBehaviour
     {
         dead = true;
         GetComponent<Animator>().SetBool("dying", true);
+        _as.clip = deathSound;
+        _as.PlayOneShot(_as.clip);
         Destroy(gameObject, 1f);
     }
 
