@@ -14848,8 +14848,8 @@ MonoBehaviour:
   ghost: {fileID: 5211660174523767387, guid: beb8f4d1074417e46b9dbe948ba11805, type: 3}
   wind: {fileID: 1582883153624515570, guid: 6642bac32bb686f4393291c72c9cd784, type: 3}
   crack: {fileID: 186346140596651821, guid: 8a1fbb28e1c5bc5448dfe52e26985e52, type: 3}
-  rightTransform: {fileID: 0}
-  leftTransform: {fileID: 0}
+  rightTransform: {fileID: 9212684112029681766}
+  leftTransform: {fileID: 4331134535141915300}
   windProbability: 500
   ghostProbability: 5
   iceProbability: 500
@@ -19722,7 +19722,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661749142560936531}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.54, y: 0.939, z: 0.01}
+  m_LocalPosition: {x: 0.533, y: 0.89, z: 0.01}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 1043729327325279795}
@@ -30021,7 +30021,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4546062129455089568}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.32999998, y: 1.5079999, z: 0}
+  m_LocalPosition: {x: 0.32999998, y: 1.5079999, z: -0.1}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 1043729327325279795}
@@ -64077,6 +64077,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9154343886141193157}
   - component: {fileID: 9154343886141193156}
+  - component: {fileID: 1035233154}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -64149,6 +64150,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1035233154
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9154343886141193158}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 00df1360460b026418d44dba7434bd98, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &9154343886141909815
 GameObject:
   m_ObjectHideFlags: 0
@@ -64620,4 +64640,4 @@ MonoBehaviour:
   xClampMin: -4
   xClampMax: 4
   homeSize: 0.2
-  whistler: {fileID: 0}
+  whistler: {fileID: 1035233154}
