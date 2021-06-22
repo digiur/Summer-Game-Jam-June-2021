@@ -83,7 +83,7 @@ MonoBehaviour:
   epsilon: 0.006
   horizontalClamp: 3
   deadlyRange: 1
-  screech: {fileID: 8300000, guid: d38dc164dea96da4fbf174f8f4d95f55, type: 3}
+  screech: {fileID: 8300000, guid: 97efaed9917f1b84c85842b960669178, type: 3}
 --- !u!65 &8861519277466179323
 BoxCollider:
   m_ObjectHideFlags: 0

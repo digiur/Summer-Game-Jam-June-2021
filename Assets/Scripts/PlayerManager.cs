@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviour
     bool windActive = false;
     bool win = false;
     bool transitioned = false;
+    bool dying = false;
 
     private GameObject player;
     private Footsteps FootstepsScript;
@@ -83,15 +84,18 @@ public class PlayerManager : MonoBehaviour
             win = true;
         }
         //Start Spawning Events
-        if (!checkingProb)
-        {
-            StartCoroutine(checkProbability());
+        if(!dying){
+            if (!checkingProb)
+            {
+                StartCoroutine(checkProbability());
+            }
+            Walking();
+            //Raise Lamp
+            raiseLamp();
         }
 
-        Walking();
 
-        //Raise Lamp
-        raiseLamp();
+
 
         if (win && !transitioned)
         {
@@ -184,6 +188,7 @@ public class PlayerManager : MonoBehaviour
 
     public IEnumerator checkProbability()
     {
+        yield return new WaitForSeconds(4);
         checkingProb = true;
         bool runLoop = true;
 
