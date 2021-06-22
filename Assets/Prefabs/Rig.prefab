@@ -14561,7 +14561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1896210485
 Transform:
   m_ObjectHideFlags: 0
@@ -64213,9 +64213,6 @@ MonoBehaviour:
   windLeft: 0
   windRight: 0
   iceCracked: 0
-  torso: {fileID: 0}
-  arm: {fileID: 0}
-  legs: {fileID: 0}
 --- !u!82 &4938274773075105462
 AudioSource:
   m_ObjectHideFlags: 0
@@ -64620,4 +64617,3 @@ MonoBehaviour:
   xClampMin: -4
   xClampMax: 4
   homeSize: 0.2
-  whistler: {fileID: 0}
