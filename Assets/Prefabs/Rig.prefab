@@ -64213,6 +64213,9 @@ MonoBehaviour:
   windLeft: 0
   windRight: 0
   iceCracked: 0
+  torso: {fileID: 2519690537585722867}
+  arm: {fileID: 3894961165653880806}
+  legs: {fileID: 1694539316788990110}
 --- !u!82 &4938274773075105462
 AudioSource:
   m_ObjectHideFlags: 0
@@ -64617,3 +64620,4 @@ MonoBehaviour:
   xClampMin: -4
   xClampMax: 4
   homeSize: 0.2
+  whistler: {fileID: 0}
