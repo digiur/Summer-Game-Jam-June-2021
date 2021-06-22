@@ -68,6 +68,14 @@ public class Whistler : MonoBehaviour
         if (xIdle && Mathf.Abs(pos.x - homePosition.x) > homeSize)
         {
             pos.x += (pos.x < homePosition.x ? 1 : -1) * returnSpeedX * Time.deltaTime;
+            if (pos.x < homePosition.x)
+            {
+                transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+            }
+            else
+            {
+                transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+            }
             moving = true;
         }
 
