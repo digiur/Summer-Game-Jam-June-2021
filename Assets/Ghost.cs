@@ -21,6 +21,7 @@ public class Ghost : MonoBehaviour
     [SerializeField] public AudioClip deathSound;
 
     private bool dead = false;
+    int counter = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -57,16 +58,25 @@ public class Ghost : MonoBehaviour
 
         if ((transform.position - target.transform.position).magnitude < deadlyRange)
         {
+            if(counter == 0){
             StartCoroutine(DestroyScreech());
-            pm.takeDamage();
+            counter = 1;
+            }
+            
         }
     }
 
     public IEnumerator DestroyScreech()
     {
+        int counter = 0;
         _as.clip = screech;
         _as.PlayOneShot(_as.clip);
-
+        if(counter == 0){
+            pm.takeDamage();
+            counter =1;
+        }
+        yield return new WaitForSeconds(1f);
+        Destroy(this.gameObject);
         yield return null;
     }
 
