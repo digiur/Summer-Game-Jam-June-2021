@@ -648,6 +648,10 @@ PrefabInstance:
       value: Forest
       objectReference: {fileID: 0}
     - target: {fileID: 2403815646863944852, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
+      propertyPath: winDistance
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2403815646863944852, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
       propertyPath: iceProbability
       value: 15
       objectReference: {fileID: 0}

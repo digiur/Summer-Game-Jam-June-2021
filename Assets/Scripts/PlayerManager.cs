@@ -84,8 +84,7 @@ public class PlayerManager : MonoBehaviour
             win = true;
         }
         //Start Spawning Events
-        if (!dying)
-        {
+        if(!dying && !win){
             if (!checkingProb)
             {
                 StartCoroutine(checkProbability());
