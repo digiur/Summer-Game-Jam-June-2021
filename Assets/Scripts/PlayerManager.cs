@@ -272,6 +272,7 @@ public class PlayerManager : MonoBehaviour
         if (((player.transform.position.x - iceCrack.transform.position.x) <= iceRange) &&
             ((player.transform.position.x - iceCrack.transform.position.x) >= -iceRange))
         {
+            dying = true;
             if (!transitioned)
             {
                 transitioned = true;
@@ -295,10 +296,11 @@ public class PlayerManager : MonoBehaviour
     //External use methods
     public void takeDamage()
     {
-        //Debug.Log("Take Damage");
+        Debug.Log("Take Damage");
         lives -= 1;
         if (lives == 0)
         {
+            dying = true;
             if (!transitioned)
             {
                 transitioned = true;
