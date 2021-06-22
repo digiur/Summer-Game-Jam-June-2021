@@ -188,6 +188,7 @@ public class PlayerManager : MonoBehaviour
 
     public IEnumerator checkProbability()
     {
+        yield return new WaitForSeconds(4);
         checkingProb = true;
         bool runLoop = true;
 

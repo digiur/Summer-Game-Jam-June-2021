@@ -130,6 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2403815646863944852, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
+      propertyPath: iceProbability
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2403815646863944852, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
+      propertyPath: windProbability
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 9154343886141909813, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
       propertyPath: m_RootOrder
       value: 0
