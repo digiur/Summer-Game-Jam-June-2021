@@ -159,6 +159,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1152898373, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
+      propertyPath: whistler
+      value: 
+      objectReference: {fileID: 1035233154}
     - target: {fileID: 6035563265060928793, guid: 5b8e2667db1d33d4ea2420675512fc77, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.533
