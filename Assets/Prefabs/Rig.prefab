@@ -14561,7 +14561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1896210485
 Transform:
   m_ObjectHideFlags: 0
@@ -64371,6 +64371,7 @@ MonoBehaviour:
   black: {fileID: 1529976292}
   autoTransitionToMainMenu: 0
   autoWaitTime: 0
+  transitioned: 0
 --- !u!1 &9154343886857936080
 GameObject:
   m_ObjectHideFlags: 0

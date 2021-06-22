@@ -84,6 +84,7 @@ MonoBehaviour:
   horizontalClamp: 3
   deadlyRange: 1
   screech: {fileID: 8300000, guid: 97efaed9917f1b84c85842b960669178, type: 3}
+  deathSound: {fileID: 8300000, guid: d17b534e1056f8b4593619b87f027140, type: 3}
 --- !u!65 &8861519277466179323
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -107,7 +108,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c76ebeaa5957f1d4b9dc941c0e006008, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d7c96ae8e413f524299fc62193095135, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.372
   m_Pitch: 1
