@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Plains.unity
     guid: 6482a1e1a0a1cfe40bdceac741e3fffe
   - enabled: 1
+    path: Assets/Scenes/Forest.unity
+    guid: d33abf987fa87474da3f066e48045d3a
+  - enabled: 1
     path: Assets/Scenes/Win.unity
     guid: eb48e5d76cb516e4ca2c3d4ac0a4493d
   - enabled: 1
