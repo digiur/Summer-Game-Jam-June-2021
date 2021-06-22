@@ -13,7 +13,7 @@ public class TransitionController : MonoBehaviour
     [SerializeField]
     private float autoWaitTime = 0f;
 
-    private bool transitioned = false;
+    public bool transitioned = false;
 
     // Update is called once per frame
     void Update()
@@ -27,6 +27,7 @@ public class TransitionController : MonoBehaviour
 
     public void Transition(string scene)
     {
+        transitioned = true;
         StartCoroutine(TransitionRoutine(scene));
     }
 

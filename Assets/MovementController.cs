@@ -36,6 +36,7 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (tc.transitioned) return;
         bool walking = false;
         if (Input.GetButton("forward") && !iceCracked)
         {
