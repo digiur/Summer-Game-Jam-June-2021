@@ -22,6 +22,8 @@ public class Whistler : MonoBehaviour
     private float xClampMax;
     [SerializeField]
     private float homeSize;
+    [SerializeField]
+    Animator whistler;
     private GameObject player;
     Vector3 homePosition;
 
@@ -60,19 +62,45 @@ public class Whistler : MonoBehaviour
             xIdle = false;
         }
 
+        bool moving = false;
+        bool forward = false;
+        bool back = false;
+        if (xIdle && Mathf.Abs(pos.x - homePosition.x) > homeSize)
+        {
+            pos.x += (pos.x < homePosition.x ? 1 : -1) * returnSpeedX * Time.deltaTime;
+            moving = true;
+        }
+
+        if (yIdle && Mathf.Abs(pos.y - homePosition.y) > homeSize)
+        {
+            pos.y += (pos.y < homePosition.y ? 1 : -1) * returnSpeedY * Time.deltaTime;
+            moving = true;
+            forward = pos.y < homePosition.y;
+            back = !forward;
+        }
+
+        if (pos.y > yClampMax)
+        {
+            moving = true;
+            forward = false;
+            back = true;
+
+        }
         pos.y = Mathf.Clamp(pos.y, yClampMin, yClampMax);
         pos.x = Mathf.Clamp(pos.x, xClampMin, xClampMax);
 
-        if (xIdle && Mathf.Abs(pos.x - homePosition.x) > homeSize)
-            pos.x += (pos.x < homePosition.x ? 1 : -1) * returnSpeedX * Time.deltaTime;
-
-        if (yIdle && Mathf.Abs(pos.y - homePosition.y) > homeSize)
-            pos.y += (pos.y < homePosition.y ? 1 : -1) * returnSpeedY * Time.deltaTime;
+        whistler.SetBool("Moving", moving);
+        whistler.SetBool("Forward", forward);
+        whistler.SetBool("Backward", back);
 
         if (pos.y < player.transform.localPosition.y)
+        {
             pos.z = 1.9f;
+        }
         else
+        {
             pos.z = 2.1f;
+        }
 
         transform.localPosition = pos;
     }
