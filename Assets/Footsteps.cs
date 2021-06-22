@@ -13,6 +13,11 @@ public class Footsteps : MonoBehaviour
     private Transform leftTransform;
     [SerializeField]
     private float forwardOffset;
+    [SerializeField]
+    private float timeBetweenFootsteps;
+    [SerializeField]
+    private bool auto;
+    private float time;
     private Boolean right = true;
 
     private AudioSource _as;
@@ -21,6 +26,18 @@ public class Footsteps : MonoBehaviour
     void Awake()
     {
         _as = GetComponent<AudioSource>();
+        time = timeBetweenFootsteps;
+    }
+
+    void Update()
+    {
+        if (!auto) return;
+
+        if ((time -= Time.deltaTime) < 0)
+        {
+            time = timeBetweenFootsteps;
+            makeFootstep();
+        }
     }
 
     public void makeFootstep()
